@@ -1,6 +1,3 @@
-//Light.cppを改造
-
-
 #include <KitchenShield.h>
 
 #include "ResetSwitch.h"

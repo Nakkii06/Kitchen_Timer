@@ -1,5 +1,3 @@
-//Light.hから改造
-
 #ifndef ResetSwitch_H
 #define ResetSwitch_H
 

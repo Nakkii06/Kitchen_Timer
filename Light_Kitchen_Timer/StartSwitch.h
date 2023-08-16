@@ -1,5 +1,3 @@
-//LightSwitch.hを改造
-
 #ifndef StartSwitch_H
 #define StartSwitch_H
 

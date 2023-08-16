@@ -1,5 +1,3 @@
-//Light.hから改造
-
 #ifndef SetTime_H
 #define SetTime_H
 

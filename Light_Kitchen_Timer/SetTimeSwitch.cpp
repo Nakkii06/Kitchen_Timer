@@ -1,5 +1,3 @@
-//LightSwitch.cppを改造
-
 #include <KitchenShield.h>
 
 #include "SetTimeSwitch.h"
