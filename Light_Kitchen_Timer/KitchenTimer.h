@@ -18,16 +18,16 @@
 class KitchenTimer {
   public:
     enum status {//タイマーの状態
-      stop,
-      countUp,
-      countDown
+      STOP,
+      COUNT_UP,
+      COUNT_DOWN
     };
 
   private:
     RequestSensor* sen[4];
     ResponseActuator* act[2];
     
-    status s;
+    status current_status;
     int remain_time = 0;
     
   public:
@@ -36,7 +36,6 @@ class KitchenTimer {
     int getRemainTime();
     void setRemainTime(int time);
     void addRemainTime(int time);
-    //statu getStatus();
     void update(RequestSensor* rs);
     void handle();
 };

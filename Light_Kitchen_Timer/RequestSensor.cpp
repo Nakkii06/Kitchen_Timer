@@ -26,3 +26,6 @@ void RequestSensor::notify() {
     observer->update(this);
   }
 }
+
+void RequestSensor::startClock(){}
+void RequestSensor::stopClock(){}

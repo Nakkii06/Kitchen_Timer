@@ -40,10 +40,9 @@ KitchenTimer::~KitchenTimer() {
 
 void KitchenTimer::update(RequestSensor* rs) {
   ResponseActuator::response res = ResponseActuator::NO_RESPONSE;
-  status s = stop;
 
-  switch(s) {//状態遷移図に従う
-    case stop: //初期停止中
+  switch(current_status) {//状態遷移図に従う
+    case KitchenTimer::STOP: //初期停止中
       switch(rs -> getRequest()) {
         case RequestSensor::START_COUNT:
           //アップかダウンをremain_timeから判別，clockをスタートさせる
@@ -51,21 +50,22 @@ void KitchenTimer::update(RequestSensor* rs) {
             //FIXME
             //res = ResponseActuator:: START_COUNT;
             //RequestSensor::Clock->startClock();
-            MsTimer2::start();
-            s = countUp;
+            current_status = KitchenTimer::COUNT_UP;
+            sen[0]->startClock();
+            
           } else if(remain_time != 0) {
             //FIXME
             //res = ResponseActuator:: START_COUNT;
             //RequestSensor::Clock->startClock();
-            s = countDown;
-            MsTimer2::start();
+            current_status = KitchenTimer::COUNT_DOWN;
+            sen[0]->startClock();
           }
           break;
 
         case RequestSensor::RESET:
           remain_time = 0;
           res = ResponseActuator::SHOW_TIME;
-          s = stop;
+          current_status = KitchenTimer::STOP;
           break;
 
         case RequestSensor::ADD_TIME_ONEMIN:
@@ -82,7 +82,7 @@ void KitchenTimer::update(RequestSensor* rs) {
           break;
       }
 
-    case countUp://カウントアップ中
+    case KitchenTimer::COUNT_UP://カウントアップ中
       switch(rs -> getRequest()) {
         case RequestSensor::SECOND_PASS:
           remain_time++;
@@ -93,12 +93,12 @@ void KitchenTimer::update(RequestSensor* rs) {
           break;
       }
 
-    case countDown://カウントダウン中
+    case KitchenTimer::COUNT_DOWN://カウントダウン中
       switch(rs -> getRequest()) {
         case RequestSensor::SECOND_PASS: 
           if(remain_time == 0) {
             res = ResponseActuator::BGM;
-            s = stop; //よくない，次押されるのを待って止める
+            current_status = KitchenTimer::STOP; //よくない，次押されるのを待って止める
           } else {
             remain_time--;
             res = ResponseActuator::SHOW_TIME;

@@ -3,7 +3,7 @@
 
 #include <KitchenShield.h>
 
-class KitchenTimer; //詳しくはKitchenTimer.hで記述
+class KitchenTimer;
 
 class RequestSensor {
   public:
@@ -30,6 +30,10 @@ class RequestSensor {
     virtual request getRequest();
     virtual void notify();
     virtual void handle() = 0;
+
+    //for Clock class
+    virtual void startClock();
+    virtual void stopClock();
 };
 
 #endif

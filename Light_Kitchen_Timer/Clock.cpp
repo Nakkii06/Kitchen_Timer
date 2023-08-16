@@ -11,7 +11,6 @@ Clock::Clock() {
   setInterrupted(false);
   setRequest(RequestSensor::NO_REQUEST);
   MsTimer2::set(1000, tick);
-  //MsTimer2::start();
 }
 
 Clock::~Clock() { 
@@ -31,17 +30,10 @@ void Clock::handle() {
   }
 }
 
-//test
-/*
-void Clock::handle(KitchenTimer* timer, ResponseActuator::response res) {
-  if (res == ResponseActuator::START_COUNT) {
-    MsTimer2::start();
-
-  }
-}  
-*/
-
-
 void startClock() {
   MsTimer2::start();
+}
+
+void stopClock() {
+  MsTimer2::stop();
 }

@@ -15,11 +15,8 @@ class Clock : public RequestSensor {
     ~Clock();
     void setInterrupted(boolean _intr);
     void handle();
-    
-    //test
-    //void handle(KitchenTimer* timer, ResponseActuator::response res);
-
     void startClock();
+    void stopClock();
 };
 
 #endif
