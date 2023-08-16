@@ -15,8 +15,6 @@
 #include "PressedSign.h"
 //#include "BGM.h"
 
-
-
 KitchenTimer::KitchenTimer(Clock* _cl) {
   sen[0] = _cl;
   sen[1] = new SetTimeSwitch();
@@ -124,7 +122,11 @@ void KitchenTimer::update(RequestSensor* rs) {
           res = ResponseActuator::SHOW_TIME; //meaningless??
           current_status = KitchenTimer::COUNT_DOWN;
           break;
-
+        case RequestSensor::RESET:
+          remain_time = 0;
+          res = ResponseActuator::SHOW_TIME;
+          current_status = KitchenTimer::STOP;
+          break;
         default:
           break;
       }
