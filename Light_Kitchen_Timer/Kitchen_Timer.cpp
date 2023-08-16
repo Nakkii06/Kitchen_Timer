@@ -31,6 +31,9 @@ KitchenTimer::KitchenTimer(Clock* _cl) {
   act[0] = new TimeDisplay();
   act[1] = new PressedSign(); //反応確認装置 本当は操作によって一個一個分けたい
   //act[2] = new BGM(); //最後に鳴らす
+
+  current_status = KitchenTimer::STOP;
+  remain_time = 0;
 }
 
 KitchenTimer::~KitchenTimer() {

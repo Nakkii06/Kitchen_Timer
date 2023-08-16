@@ -34,7 +34,7 @@ class KitchenTimer {
     ResponseActuator* act[ACT_NUM];
     
     status current_status;
-    int remain_time = 0;
+    int remain_time;
     
   public:
     KitchenTimer(Clock* _cl);
