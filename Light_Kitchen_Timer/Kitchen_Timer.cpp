@@ -7,6 +7,7 @@
 #include "SetTimeSwitch.h"
 #include "ResetSwitch.h"
 #include "StartSwitch.h"
+#include "PauseSwitch.h"
 
 //actuator header file include, act[]の要素の名前と同じ
 #include "ResponseActuator.h"
@@ -14,13 +15,16 @@
 #include "PressedSign.h"
 //#include "BGM.h"
 
+
+
 KitchenTimer::KitchenTimer(Clock* _cl) {
   sen[0] = _cl;
   sen[1] = new SetTimeSwitch();
   sen[2] = new ResetSwitch();
   sen[3] = new StartSwitch(); //本当はupとdownで分けたい
+  sen[4] = new PauseSwitch();
   
-  for(int i = 0; i < 4; i++) {
+  for(int i = 0; i < SEN_NUM; i++) {
     sen[i] -> attachObserver(this);
   }
 
@@ -30,10 +34,10 @@ KitchenTimer::KitchenTimer(Clock* _cl) {
 }
 
 KitchenTimer::~KitchenTimer() {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < SEN_NUM; i++) {
     delete(sen[i]);
   }
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < ACT_NUM; i++) {
     delete(act[i]);
   }
 }
@@ -118,7 +122,7 @@ void KitchenTimer::update(RequestSensor* rs) {
 
 
 void KitchenTimer::handle() {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < ACT_NUM; i++) {
     sen[i]->handle();
   }
 }

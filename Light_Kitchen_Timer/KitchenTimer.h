@@ -8,12 +8,17 @@
 #include "SetTimeSwitch.h"
 #include "ResetSwitch.h"
 #include "StartSwitch.h"
+#include "PauseSwitch.h"
 
 //actuator header file include, act[]の要素の名前と同じ
 #include "ResponseActuator.h"
 #include "TimeDisplay.h"
 #include "PressedSign.h"
 //#include "BGM.h"
+
+//sen[]とact[]の数を一斉定義
+#define SEN_NUM 5
+#define ACT_NUM 2
 
 class KitchenTimer {
   public:
@@ -24,8 +29,8 @@ class KitchenTimer {
     };
 
   private:
-    RequestSensor* sen[4];
-    ResponseActuator* act[2];
+    RequestSensor* sen[SEN_NUM];
+    ResponseActuator* act[ACT_NUM];
     
     status current_status;
     int remain_time = 0;
