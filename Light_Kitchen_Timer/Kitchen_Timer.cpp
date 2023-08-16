@@ -99,12 +99,11 @@ void KitchenTimer::update(RequestSensor* rs) {
           if(remain_time == 0) {
             res = ResponseActuator::BGM;
             s = stop; //よくない，次押されるのを待って止める
-             break;
           } else {
             remain_time--;
             res = ResponseActuator::SHOW_TIME;
-            break;
           }     
+          break;
 
         default:
           break;
