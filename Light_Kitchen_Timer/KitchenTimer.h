@@ -32,7 +32,7 @@ class KitchenTimer {
     RequestSensor* sen[SEN_NUM];
     ResponseActuator* act[ACT_NUM];
     
-    status current_status;
+    State* current_state;
     int remain_time;
     
   public:
