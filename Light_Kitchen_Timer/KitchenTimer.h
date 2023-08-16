@@ -17,17 +17,15 @@
 
 class KitchenTimer {
   public:
-    enum status {//タイマーの状態
-      stop,
-      countUp,
-      countDown
-    };
+    KitchenTimer(State *state):state_() {
+      
+    }
 
   private:
     RequestSensor* sen[4];
     ResponseActuator* act[2];
     
-    status s;
+    State *state_;
     int remain_time = 0;
     
   public:
