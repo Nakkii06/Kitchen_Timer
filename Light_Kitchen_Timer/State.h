@@ -1,14 +1,22 @@
+#ifndef State_H
+#define State_H
+
+#include"KitchenTimer.h"
+
+class KitchenTimer;
+
 class State {
   protected:
-    KitchenTimer *kt_;
+    KitchenTimer* kt;
   public:
-    virtual ~State()
-    virtual std::string 
+    virtual ~State();
 
-    void set_kt(KitchenTimer *kt) {
-      this->kt_ = kt;
+    void set_kt(KitchenTimer* kt) {
+      this->kt = kt;
     }
 
-    vitrual void Handle1() = 0;
-    virtual void Handle2() = 0;
-}
+    virtual void handle() = 0;
+    
+};
+
+#endif

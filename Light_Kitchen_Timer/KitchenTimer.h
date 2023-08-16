@@ -2,6 +2,7 @@
 #define KitchenTimer_H
 
 #include <KitchenShield.h>
+#include "State.h"
 
 //sensor header file include, sen[]の要素の名前と同じ
 #include "Clock.h"
@@ -16,20 +17,15 @@
 //#include "BGM.h"
 
 class KitchenTimer {
-  public:
-    KitchenTimer(State *state):state_() {
-      
-    }
-
   private:
     RequestSensor* sen[4];
     ResponseActuator* act[2];
     
-    State *state_;
+    State* state; //state_
     int remain_time = 0;
     
   public:
-    KitchenTimer(Clock* _cl);
+    KitchenTimer(Clock* _cl, State* state);
     ~KitchenTimer();
     int getRemainTime();
     void setRemainTime(int time);
@@ -37,6 +33,8 @@ class KitchenTimer {
     //statu getStatus();
     void update(RequestSensor* rs);
     void handle();
+
+    void TransitionTo(State* state);
 };
 
 #endif

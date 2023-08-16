@@ -6,14 +6,14 @@
 
 KitchenTimer* kt;
 Clock* cl;
-
+State* s;
 void tick() {
   cl -> setInterrupted(true);
 }
 
 void setup() {
   cl = new Clock();
-  kt = new KitchenTimer(cl);
+  kt = new KitchenTimer(cl, s);
 
 }
 

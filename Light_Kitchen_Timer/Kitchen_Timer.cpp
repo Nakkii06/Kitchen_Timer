@@ -1,20 +1,9 @@
 #include <KitchenShield.h>
 
 #include "KitchenTimer.h"
+#include "State.h"
 
-//sensor header file include, sen[]の要素の名前と同じ
-#include "Clock.h"
-#include "SetTimeSwitch.h"
-#include "ResetSwitch.h"
-#include "StartSwitch.h"
-
-//actuator header file include, act[]の要素の名前と同じ
-#include "ResponseActuator.h"
-#include "TimeDisplay.h"
-#include "PressedSign.h"
-//#include "BGM.h"
-
-KitchenTimer::KitchenTimer(Clock* _cl) {
+KitchenTimer::KitchenTimer(Clock* _cl, State* state) {
   sen[0] = _cl;
   sen[1] = new SetTimeSwitch();
   sen[2] = new ResetSwitch();
@@ -36,11 +25,17 @@ KitchenTimer::~KitchenTimer() {
   for (int i = 0; i < 2; i++) {
     delete(act[i]);
   }
+
+  delete(state);
 }
 
 void KitchenTimer::update(RequestSensor* rs) {
   ResponseActuator::response res = ResponseActuator::NO_RESPONSE;
-  status s = stop;
+  //status s = stop;
+
+  //FIXME
+  s->handle(rs->getRequest);
+
 
   switch(s) {//状態遷移図に従う
     case stop: //初期停止中
