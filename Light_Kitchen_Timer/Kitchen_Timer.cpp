@@ -49,14 +49,12 @@ void KitchenTimer::update(RequestSensor* rs) {
           if(remain_time == 0) {
             //FIXME
             //res = ResponseActuator:: START_COUNT;
-            //RequestSensor::Clock->startClock();
             current_status = KitchenTimer::COUNT_UP;
             sen[0]->startClock();
             
           } else if(remain_time != 0) {
             //FIXME
             //res = ResponseActuator:: START_COUNT;
-            //RequestSensor::Clock->startClock();
             current_status = KitchenTimer::COUNT_DOWN;
             sen[0]->startClock();
           }
