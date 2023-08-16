@@ -49,49 +49,23 @@ void KitchenTimer::update(RequestSensor* rs) {
   switch(current_status) {//状態遷移図に従う
     case KitchenTimer::STOP: //初期停止中
       switch(rs -> getRequest()) {
-        case RequestSensor::START_COUNT:
-          //アップかダウンをremain_timeから判別，clockをスタートさせる
-          if(remain_time == 0) {
-            //FIXME
-            //res = ResponseActuator:: START_COUNT;
-            current_status = KitchenTimer::COUNT_UP;
-            sen[0]->startClock();
-            
-          } else if(remain_time != 0) {
-            //FIXME
-            //res = ResponseActuator:: START_COUNT;
+        case RequestSensor::START_COUNT:  
             current_status = KitchenTimer::COUNT_DOWN;
             sen[0]->startClock();
-          }
           break;
-
         case RequestSensor::RESET:
           remain_time = 0;
           res = ResponseActuator::SHOW_TIME;
           current_status = KitchenTimer::STOP;
           break;
-
         case RequestSensor::ADD_TIME_ONEMIN:
           remain_time += 60;
           res = ResponseActuator::SHOW_TIME; //音もならしたい
           break;
-        
         case RequestSensor::ADD_TIME_TENSEC:
           remain_time += 10;
           res = ResponseActuator::SHOW_TIME;
           break;
-
-        default:
-          break;
-      }
-
-    case KitchenTimer::COUNT_UP://カウントアップ中
-      switch(rs -> getRequest()) {
-        case RequestSensor::SECOND_PASS:
-          remain_time++;
-          res = ResponseActuator::SHOW_TIME;
-          break;
-
         default:
           break;
       }
@@ -111,7 +85,6 @@ void KitchenTimer::update(RequestSensor* rs) {
           res = ResponseActuator::SHOW_TIME; //meaningless??
           current_status = KitchenTimer::PAUSING;
           break;
-
         default:
           break;
       }
@@ -139,8 +112,6 @@ void KitchenTimer::update(RequestSensor* rs) {
     act[i]->handle(this, res);
   }
 }
-
-
 
 void KitchenTimer::handle() {
   for (int i = 0; i < SEN_NUM; i++) {
