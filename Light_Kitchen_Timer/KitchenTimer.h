@@ -25,7 +25,8 @@ class KitchenTimer {
     enum status {//タイマーの状態
       STOP,
       COUNT_UP,
-      COUNT_DOWN
+      COUNT_DOWN,
+      PAUSING
     };
 
   private:

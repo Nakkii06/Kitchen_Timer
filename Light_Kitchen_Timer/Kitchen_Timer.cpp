@@ -106,15 +106,31 @@ void KitchenTimer::update(RequestSensor* rs) {
             res = ResponseActuator::SHOW_TIME;
           }     
           break;
+        case RequestSensor::PAUSE_COUNT:
+          res = ResponseActuator::SHOW_TIME; //meaningless??
+          current_status = KitchenTimer::PAUSING;
+          break;
 
         default:
           break;
       }
+    
+    case KitchenTimer::PAUSING: //一時停止　カウントダウン中のみを実装
+      switch(rs -> getRequest()) {
+        case RequestSensor::RESTART_COUNT:
+          res = ResponseActuator::SHOW_TIME; //meaningless??
+          current_status = KitchenTimer::COUNT_DOWN;
+          break;
+
+        default:
+          break;
+      }
+      break;
 
     default:
       break;
   }
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < ACT_NUM; i++) {
     act[i]->handle(this, res);
   }
 }
@@ -122,7 +138,7 @@ void KitchenTimer::update(RequestSensor* rs) {
 
 
 void KitchenTimer::handle() {
-  for (int i = 0; i < ACT_NUM; i++) {
+  for (int i = 0; i < SEN_NUM; i++) {
     sen[i]->handle();
   }
 }
