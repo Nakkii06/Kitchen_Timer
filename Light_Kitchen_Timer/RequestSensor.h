@@ -10,8 +10,8 @@ class RequestSensor {
     enum request {
       NO_REQUEST,
       START_COUNT,
-      PAUSE,
-      RESTART,
+      PAUSE_COUNT,
+      RESTART_COUNT,
       ADD_TIME_ONEMIN,
       ADD_TIME_TENSEC,
       RESET,
