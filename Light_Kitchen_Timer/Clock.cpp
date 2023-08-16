@@ -30,10 +30,12 @@ void Clock::handle() {
   }
 }
 
-void startClock() {
+void Clock::startClock() {
   MsTimer2::start();
 }
 
-void stopClock() {
+void Clock::stopClock() {
   MsTimer2::stop();
 }
+
+

@@ -4,9 +4,6 @@
 #include <MsTimer2.h>
 #include "RequestSensor.h"
 
-//test
-//#include "ResponseActuator.h"
-
 class Clock : public RequestSensor {
   private:
     boolean interrupted;
