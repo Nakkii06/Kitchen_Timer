@@ -12,8 +12,7 @@
 //actuator header file include, act[]の要素の名前と同じ
 #include "ResponseActuator.h"
 #include "TimeDisplay.h"
-#include "PressedSign.h"
-//#include "BGM.h"
+#include "EndAlarm.h"
 
 //StatePatern
 #include "StopState.h"
@@ -32,8 +31,7 @@ KitchenTimer::KitchenTimer(Clock* _cl) {
   }
 
   act[0] = new TimeDisplay();
-  act[1] = new PressedSign(); //反応確認装置 本当は操作によって一個一個分けたい
-  //act[2] = new BGM(); //最後に鳴らす
+  act[1] = new EndAlarm(); //反応確認装置 本当は操作によって一個一個分けたい
 
   //for State Pattern
   current_state = StopState::getInstance();
