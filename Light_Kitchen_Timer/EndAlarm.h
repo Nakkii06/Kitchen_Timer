@@ -1,4 +1,5 @@
 #ifndef EndAlarm_H
+#define EndAlarm_H
 
 #include <KitchenShield.h>
 #include "ResponseActuator.h"

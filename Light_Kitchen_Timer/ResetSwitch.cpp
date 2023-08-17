@@ -7,6 +7,7 @@
 ResetSwitch::ResetSwitch() {
   sw = new Switch();
   sw->init(8); //sw4
+  turnedOn = false;
   
   //btn0 = new Button();
   //btn1 = new Button();
@@ -23,10 +24,15 @@ ResetSwitch::~ResetSwitch() {
 }
 
 void ResetSwitch::handle() {
-  
-  if (sw->isOn()) {
+  if(sw->isOn()) {
+    turnedOn = true;
+    setRequest(RequestSensor::NO_REQUEST);
+  } else if(turnedOn && sw->isOff()) {
     setRequest(RequestSensor::RESET);
+    turnedOn = false;
     this->notify();
+  } else {
+    setRequest(RequestSensor::NO_REQUEST);
   }
   
   /*
@@ -37,5 +43,4 @@ void ResetSwitch::handle() {
     this->notify();
   }
   */
-
 }

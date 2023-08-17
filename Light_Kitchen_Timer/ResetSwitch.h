@@ -7,6 +7,7 @@
 class ResetSwitch : public RequestSensor {
   private:
     Switch* sw;
+    boolean turnedOn;
 
     //Button* btn0;
     //Button* btn1;

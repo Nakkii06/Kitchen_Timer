@@ -9,6 +9,7 @@ class StartSwitch : public RequestSensor {
     //Button* but;
     //boolean pressed;
     Switch* sw;
+    boolean turnedOn;
     RequestSensor::request req;
 
   public:
