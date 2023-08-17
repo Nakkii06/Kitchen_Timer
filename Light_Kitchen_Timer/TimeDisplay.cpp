@@ -1,5 +1,3 @@
-//Light.cppを改造
-
 #include <KitchenShield.h>
 
 #include "KitchenTimer.h"
@@ -15,7 +13,7 @@ TimeDisplay::~TimeDisplay() {
 }
 
 void TimeDisplay::handle(KitchenTimer* timer, ResponseActuator::response res) {
-  if (res == ResponseActuator::SHOW_TIME) {
+  if (res == ResponseActuator::SHOW_TIME || ALARM) {
     t = timer->getRemainTime();
     a = t/600;
     b = (t-a*600)/60;

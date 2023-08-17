@@ -12,14 +12,13 @@
 //actuator header file include, act[]の要素の名前と同じ
 #include "ResponseActuator.h"
 #include "TimeDisplay.h"
-#include "PressedSign.h"
-//#include "BGM.h"
+#include "EndAlarm.h"
 
 KitchenTimer::KitchenTimer(Clock* _cl) {
   sen[0] = _cl;
   sen[1] = new SetTimeSwitch();
   sen[2] = new ResetSwitch();
-  sen[3] = new StartSwitch(); //本当はupとdownで分けたい
+  sen[3] = new StartSwitch(); 
   sen[4] = new PauseSwitch();
   
   for(int i = 0; i < SEN_NUM; i++) {
@@ -27,11 +26,11 @@ KitchenTimer::KitchenTimer(Clock* _cl) {
   }
 
   act[0] = new TimeDisplay();
-  act[1] = new PressedSign(); //反応確認装置 本当は操作によって一個一個分けたい
-  //act[2] = new BGM(); //最後に鳴らす
-
+  act[1] = new EndAlarm(); 
+  
   current_status = KitchenTimer::STOP;
   remain_time = 0;
+
 }
 
 KitchenTimer::~KitchenTimer() {
@@ -50,17 +49,17 @@ void KitchenTimer::update(RequestSensor* rs) {
     case KitchenTimer::STOP: //初期停止中
       switch(rs -> getRequest()) {
         case RequestSensor::START_COUNT:  
-            current_status = KitchenTimer::COUNT_DOWN;
-            sen[0]->startClock();
+          current_status = KitchenTimer::COUNT_DOWN;
+          sen[0]->startClock();
           break;
         case RequestSensor::RESET:
           remain_time = 0;
           res = ResponseActuator::SHOW_TIME;
-          current_status = KitchenTimer::STOP;
+          sen[0]->stopClock();
           break;
         case RequestSensor::ADD_TIME_ONEMIN:
           remain_time += 60;
-          res = ResponseActuator::SHOW_TIME; //音もならしたい
+          res = ResponseActuator::SHOW_TIME;
           break;
         case RequestSensor::ADD_TIME_TENSEC:
           remain_time += 10;
@@ -73,16 +72,18 @@ void KitchenTimer::update(RequestSensor* rs) {
     case KitchenTimer::COUNT_DOWN://カウントダウン中
       switch(rs -> getRequest()) {
         case RequestSensor::SECOND_PASS: 
+          remain_time--;
+          res = ResponseActuator::SHOW_TIME;
+        
           if(remain_time == 0) {
-            res = ResponseActuator::BGM;
-            current_status = KitchenTimer::STOP; //よくない，次押されるのを待って止める
-          } else {
-            remain_time--;
-            res = ResponseActuator::SHOW_TIME;
-          }     
+            res = ResponseActuator::ALARM;
+            sen[0]->stopClock();
+            current_status = KitchenTimer::STOP;
+          }          
           break;
         case RequestSensor::PAUSE_COUNT:
-          res = ResponseActuator::SHOW_TIME; //meaningless??
+          res = ResponseActuator::SHOW_TIME; 
+          sen[0]->stopClock();
           current_status = KitchenTimer::PAUSING;
           break;
         default:
@@ -93,6 +94,7 @@ void KitchenTimer::update(RequestSensor* rs) {
       switch(rs -> getRequest()) {
         case RequestSensor::RESTART_COUNT:
           res = ResponseActuator::SHOW_TIME; //meaningless??
+          sen[0]->startClock();
           current_status = KitchenTimer::COUNT_DOWN;
           break;
         case RequestSensor::RESET:

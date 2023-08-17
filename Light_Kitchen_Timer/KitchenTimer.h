@@ -13,8 +13,7 @@
 //actuator header file include, act[]の要素の名前と同じ
 #include "ResponseActuator.h"
 #include "TimeDisplay.h"
-#include "PressedSign.h"
-//#include "BGM.h"
+#include "EndAlarm.h"
 
 //sen[]とact[]の数を一斉定義
 #define SEN_NUM 5

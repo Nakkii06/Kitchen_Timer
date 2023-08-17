@@ -1,16 +1,16 @@
-#ifndef PressedSign_H
-#define PressedSign_H
+#ifndef EndAlarm_H
 
 #include <KitchenShield.h>
 #include "ResponseActuator.h"
 
-class PressedSign : public ResponseActuator {
+class EndAlarm : public ResponseActuator {
   private:
     Buzzer* buz;
   public:
-    PressedSign();
-    ~PressedSign();
+    EndAlarm();
+    ~EndAlarm();
     void handle(KitchenTimer* timer, ResponseActuator::response res);
+    void beet(int k, int l);
 };
 
 #endif

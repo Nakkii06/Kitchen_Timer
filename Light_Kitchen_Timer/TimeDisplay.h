@@ -1,5 +1,3 @@
-//Light.hから改造
-
 #ifndef TimeDisplay_H
 #define TimeDisplay_H
 
