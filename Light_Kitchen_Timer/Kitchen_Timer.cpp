@@ -15,6 +15,9 @@
 #include "PressedSign.h"
 //#include "BGM.h"
 
+//StatePatern
+#include "StopState.h"
+
 KitchenTimer::KitchenTimer(Clock* _cl) {
   sen[0] = _cl;
   sen[1] = new SetTimeSwitch();
@@ -31,7 +34,7 @@ KitchenTimer::KitchenTimer(Clock* _cl) {
   //act[2] = new BGM(); //最後に鳴らす
 
   //for State Pattern
-  current_state = new StopState;
+  current_state = StopState::getInstance();
   remain_time = 0;
 
 }
@@ -47,7 +50,7 @@ KitchenTimer::~KitchenTimer() {
 
 void KitchenTimer::update(RequestSensor* rs) {
   ResponseActuator::response res = ResponseActuator::NO_RESPONSE;
-  res = state->handle(this, rs.getRequest()); //state patern
+  res = current_state->handle(this, rs->getRequest()); //state patern
 
   for (int i = 0; i < ACT_NUM; i++) {
     act[i]->handle(this, res);
@@ -71,3 +74,12 @@ void KitchenTimer::setRemainTime(int time) {
 void KitchenTimer::addRemainTime(int time) {
   remain_time += time;
 }
+
+void KitchenTimer::startClock() {
+  sen[0]->startClock();
+}
+
+void KitchenTimer::stopClock() {
+  sen[0]->stopClock();
+}
+

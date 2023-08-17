@@ -16,6 +16,9 @@
 #include "PressedSign.h"
 //#include "BGM.h"
 
+//StatePatern
+#include "State.h"
+
 //sen[]とact[]の数を一斉定義
 #define SEN_NUM 5
 #define ACT_NUM 2
@@ -43,6 +46,8 @@ class KitchenTimer {
     void addRemainTime(int time);
     void update(RequestSensor* rs);
     void handle();
+    void startClock();
+    void stopClock();
 };
 
 #endif
