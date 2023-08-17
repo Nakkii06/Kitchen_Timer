@@ -46,11 +46,13 @@ KitchenTimer::~KitchenTimer() {
   for (int i = 0; i < ACT_NUM; i++) {
     delete(act[i]);
   }
+  delete(current_state);
 }
 
 void KitchenTimer::update(RequestSensor* rs) {
   ResponseActuator::response res = ResponseActuator::NO_RESPONSE;
-  res = current_state->handle(this, rs->getRequest()); //state patern
+  //state patern
+  res = current_state->handle(this, rs->getRequest()); 
 
   for (int i = 0; i < ACT_NUM; i++) {
     act[i]->handle(this, res);
@@ -81,5 +83,12 @@ void KitchenTimer::startClock() {
 
 void KitchenTimer::stopClock() {
   sen[0]->stopClock();
+}
+
+void KitchenTimer::TransitionTo(State *state){
+  if(this->current_state != nullptr)
+    delete this->current_state;
+  this->current_state = state;
+  //this->current_state->set_KitchenTimer(this);
 }
 

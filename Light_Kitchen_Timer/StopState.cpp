@@ -1,13 +1,14 @@
 #include <KitchenShield.h>
 
-#include "StopState.h"
 #include "KitchenTimer.h"
 #include "RequestSensor.h"
+
 #include "State.h"
+#include "StopState.h"
 
 static StopState* StopState::getInstance() {
-  static StopState m_pStop;
-  return &m_pStop;
+  static StopState s;
+  return &s;
 }
 
 ResponseActuator::response StopState::handle(KitchenTimer* kt, RequestSensor::request req) {
@@ -16,12 +17,12 @@ ResponseActuator::response StopState::handle(KitchenTimer* kt, RequestSensor::re
   switch (req) {
     case RequestSensor::START_COUNT:
       kt->startClock();
-      TransitionTo(KitchenTimer *kt);
+      //TransitionTo(CountState->getInstance());
       break;
     case RequestSensor::RESET:
       kt->setRemainTime(0);
       res = ResponseActuator::SHOW_TIME;
-      current_status = KitchenTimer::STOP;
+      kt->TransitionTo(StopState::getInstance());
       break;
     case RequestSensor::ADD_TIME_ONEMIN:
       kt->addRemainTime(60);
@@ -34,4 +35,7 @@ ResponseActuator::response StopState::handle(KitchenTimer* kt, RequestSensor::re
     default:
       break;
   }
+  //void StopState::set_KitchenTimer(KitchenTimer *kt){
+
+  //}
 }

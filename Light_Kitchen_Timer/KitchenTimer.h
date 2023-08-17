@@ -24,18 +24,11 @@
 #define ACT_NUM 2
 
 class KitchenTimer {
-  public:
-    enum status {//タイマーの状態
-      STOP,
-      COUNT_DOWN,
-      PAUSING
-    };
-
   private:
     RequestSensor* sen[SEN_NUM];
     ResponseActuator* act[ACT_NUM];
     
-    State* current_state;
+    State *current_state;
     int remain_time;
     
   public:
@@ -48,6 +41,9 @@ class KitchenTimer {
     void handle();
     void startClock();
     void stopClock();
+
+    //for State patern
+    void TransitionTo(State *state);
 };
 
 #endif

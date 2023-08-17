@@ -8,20 +8,33 @@
 #include "State.h"
 
 class StopState : public State{
-  private:
-    //
+  /*
+  protected:
+    StopState() {}
+    static StopState* m_pStop;
   public:
-    StopState() = default;
-    ~StopState();
-
     //singleton
-    StopState(const StopState&) = delete; //not be clonable
-    StopState operator=(const StopState&) = delete;
-    static StopState* getInstance();
+    // (type_Name const&) is equivalent to (const type_Name &)
+    StopState(const StopState&) = delete;
+    StopState& operator=(const StopState&) = delete;
+    static StopState *getInstance();
  
     ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req);
     void TransitionTo(State* state); //(State* s)
-    
+    //void set_KitchenTimer(KitchenTimer *kt);
+    */
+  
+  public:
+    static StopState* getInstance();
+    StopState(const StopState&) = delete;
+    StopState& operator=(const StopState&) = delete;
+  private:
+    StopState() = default;
+    static StopState *m_pStop;
+    ~StopState() = default;
+
+    ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req);
+    void TransitionTo(State* state); //(State* s)
 };
 
 #endif

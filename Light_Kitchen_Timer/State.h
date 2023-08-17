@@ -7,10 +7,12 @@
 class KitchenTimer;
 
 class State {
+  protected:
+    KitchenTimer *_kt;  
   public:
-    ~State();
+    //virtual ~State(); //コメントアウトしないとundefined reference to `State::~State()'
     virtual ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req) = 0;
-    virtual void TransitionTo(State *state) = 0;
+    //void set_KitchenTimer(KitchenTimer *kt){this->_kt = kt;}
 };
 
 #endif
