@@ -10,7 +10,6 @@ class SetTimeSwitch : public RequestSensor {
     Button* btn1;
     boolean pressed;
     RequestSensor::request req;
-
   public:
     SetTimeSwitch();
     ~SetTimeSwitch();

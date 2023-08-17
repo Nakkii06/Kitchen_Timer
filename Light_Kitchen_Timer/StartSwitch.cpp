@@ -5,9 +5,6 @@
 #include "RequestSensor.h"
 
 StartSwitch::StartSwitch() {
-  //btn = new Button();
-  //btn->init(A0);
-
   sw = new Switch();
   sw->init(13); //sw1
   turnedOn = false;
@@ -15,8 +12,6 @@ StartSwitch::StartSwitch() {
 }
 
 StartSwitch::~StartSwitch() {
-  //delete(btn);
-
   delete(sw);
 }
 

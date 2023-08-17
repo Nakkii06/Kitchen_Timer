@@ -3,7 +3,7 @@
 
 #include "RequestSensor.h"
 
-class KitchenTimer; //詳しくはKitchenTimer.hで記述
+class KitchenTimer;
 
 class ResponseActuator {
   public:

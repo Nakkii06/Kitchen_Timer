@@ -27,13 +27,5 @@ void TimeDisplay::handle(KitchenTimer* timer, ResponseActuator::response res) {
     disp->writeDigitNum(POS_D4,d,false);
     disp->update();
 
-  } /* else if (res == ResponseActuator::RESET) {
-    disp->writeDigitNum(POS_D1,0,false);
-    disp->writeDigitNum(POS_D2,0,false);
-    disp->writeColon(COLON_BOTH);
-    disp->writeDigitNum(POS_D3,0,false);
-    disp->writeDigitNum(POS_D4,0,false);
-    disp->update();
-  }
-  */
+  } 
 }

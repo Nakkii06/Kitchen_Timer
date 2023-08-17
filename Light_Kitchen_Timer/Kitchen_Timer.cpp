@@ -90,7 +90,7 @@ void KitchenTimer::update(RequestSensor* rs) {
           break;
       }
     
-    case KitchenTimer::PAUSING: //一時停止　カウントダウン中のみを実装
+    case KitchenTimer::PAUSING: //一時停止
       switch(rs -> getRequest()) {
         case RequestSensor::RESTART_COUNT:
           res = ResponseActuator::SHOW_TIME; //meaningless??
