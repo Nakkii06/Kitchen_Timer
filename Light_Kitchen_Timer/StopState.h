@@ -7,6 +7,7 @@
 
 #include "State.h"
 
+
 class StopState : public State{
   /*
   protected:
@@ -34,7 +35,7 @@ class StopState : public State{
     ~StopState() = default;
 
     ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req);
-    void TransitionTo(State* state); //(State* s)
+    
 };
 
 #endif

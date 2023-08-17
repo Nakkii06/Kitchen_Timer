@@ -5,6 +5,8 @@
 
 #include "State.h"
 #include "StopState.h"
+#include "CountState.h"
+
 
 static StopState* StopState::getInstance() {
   static StopState s;
@@ -17,12 +19,12 @@ ResponseActuator::response StopState::handle(KitchenTimer* kt, RequestSensor::re
   switch (req) {
     case RequestSensor::START_COUNT:
       kt->startClock();
-      //TransitionTo(CountState->getInstance());
+      kt->TransitionTo(CountState::getInstance());
       break;
     case RequestSensor::RESET:
       kt->setRemainTime(0);
       res = ResponseActuator::SHOW_TIME;
-      kt->TransitionTo(StopState::getInstance());
+      kt->TransitionTo(StopState::getInstance()); //meaningless??
       break;
     case RequestSensor::ADD_TIME_ONEMIN:
       kt->addRemainTime(60);

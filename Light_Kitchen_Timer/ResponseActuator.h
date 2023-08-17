@@ -12,7 +12,7 @@ class ResponseActuator {
       NO_RESPONSE,
       BUZZ,//反応確認
       SHOW_TIME,
-      BGM
+      ALARM
     };
     
     virtual void handle(KitchenTimer* timer, response res) = 0;

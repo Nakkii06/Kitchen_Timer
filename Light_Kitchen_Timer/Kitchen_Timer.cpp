@@ -17,6 +17,8 @@
 
 //StatePatern
 #include "StopState.h"
+#include "CountState.h"
+#include "PauseState.h"
 
 KitchenTimer::KitchenTimer(Clock* _cl) {
   sen[0] = _cl;
