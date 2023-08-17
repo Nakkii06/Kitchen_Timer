@@ -4,9 +4,7 @@
 #include <KitchenShield.h>
 #include "KitchenTimer.h"
 #include "RequestSensor.h"
-
 #include "State.h"
-
 
 class CountState : public State{
   public:
@@ -19,7 +17,6 @@ class CountState : public State{
     ~CountState() = default;
 
     ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req);
-    
 };
 
 #endif

@@ -15,7 +15,6 @@ static CountState* CountState::getInstance() {
 
 ResponseActuator::response CountState::handle(KitchenTimer* kt, RequestSensor::request req) {
   ResponseActuator::response res = ResponseActuator::NO_RESPONSE;
-
   switch(req) {
         case RequestSensor::SECOND_PASS: 
           kt->addRemainTime(-1);
@@ -23,11 +22,13 @@ ResponseActuator::response CountState::handle(KitchenTimer* kt, RequestSensor::r
 
           if(kt->getRemainTime() == 0) {
             res = ResponseActuator::ALARM;
+            kt->stopClock();
             kt->TransitionTo(StopState::getInstance());
           }
           break;
         case RequestSensor::PAUSE_COUNT:
           res = ResponseActuator::SHOW_TIME; //meaningless??
+          kt->stopClock();
           kt->TransitionTo(PauseState::getInstance());
           break;
         default:

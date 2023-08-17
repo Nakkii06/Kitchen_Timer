@@ -7,7 +7,6 @@
 #include "StopState.h"
 #include "CountState.h"
 
-
 static StopState* StopState::getInstance() {
   static StopState s;
   return &s;

@@ -4,7 +4,6 @@
 #include <KitchenShield.h>
 #include "KitchenTimer.h"
 #include "RequestSensor.h"
-
 #include "State.h"
 
 class PauseState : public State{
@@ -18,7 +17,6 @@ class PauseState : public State{
     ~PauseState() = default;
 
     ResponseActuator::response handle(KitchenTimer *kt, RequestSensor::request req);
-    
 };
 
 #endif
